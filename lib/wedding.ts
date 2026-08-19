@@ -66,13 +66,66 @@ export const PALETTE: { name: string; hex: string }[] = [
   { name: "Чорний", hex: "#2b2b2b" },
 ]
 
+/* ------------------------------------------------------------------ *
+ * Guests
+ * ------------------------------------------------------------------ */
+
+export type Guest = {
+  /** URL slug, e.g. "evgeniya" or "alex-and-masha" */
+  slug: string
+  /** Display name(s), e.g. "Євгенія" or "Олександр та Марія" */
+  name: string
+  /** Whether this invite is for one person or a couple */
+  type: "single" | "couple"
+  /** Gender is only relevant for single guests: "f" | "m" */
+  gender?: "f" | "m"
+}
+
 /**
- * Builds the personalized greeting from a ?guest= query value.
- * - no guest   -> "Любі наші гості"
- * - with guest -> "Любі наші <NAMES>" (names inserted as-is, e.g. "Петре та Ганно Бончеви")
+ * The guest list. Add new guests here in the same format.
+ * slug — used in the URL (site.com/<slug>)
+ * name — displayed name(s)
+ * type — "single" | "couple"
+ * gender — "f" | "m" (only for single)
  */
-export function buildGreeting(guest: string | null | undefined): string {
-  const value = (guest ?? "").trim()
-  if (!value) return "Любі наші гості"
-  return `Любі наші ${value}`
+export const GUESTS: Guest[] = [
+  { slug: "ivan", name: "Іван", type: "single", gender: "m" },
+  { slug: "evgeniya", name: "Євгенія", type: "single", gender: "f" },
+  { slug: "alex", name: "Олександр", type: "single", gender: "m" },
+  { slug: "natalya", name: "Наталья", type: "single", gender: "f" },
+  { slug: "roma", name: "Роман", type: "single", gender: "m" },
+  { slug: "alex-and-masha", name: "Олександр та Марія", type: "couple" },
+  { slug: "petro-and-hanna", name: "Петро та Ганна Бончеви", type: "couple" },
+  // Додавайте гостей сюди у форматі: { slug: "...", name: "...", type: "single", gender: "m" }
+]
+
+/** Looks up a guest by slug (case-insensitive). Returns null when not found. */
+export function getGuestBySlug(slug: string | null | undefined): Guest | null {
+  const value = (slug ?? "").trim().toLowerCase()
+  if (!value) return null
+  return GUESTS.find((g) => g.slug.toLowerCase() === value) ?? null
+}
+
+/**
+ * Personalized greeting line.
+ * - couple            -> "Любі наші <name>"
+ * - single, female    -> "Люба наша <name>"
+ * - single, male      -> "Любий наш <name>"
+ * - unknown guest     -> "Дорогі гості"
+ */
+export function buildGreeting(guest: Guest | null | undefined): string {
+  if (!guest) return "Дорогі гості"
+  if (guest.type === "couple") return `Любі наші ${guest.name}`
+  if (guest.gender === "f") return `Люба наша ${guest.name}`
+  return `Любий наш ${guest.name}`
+}
+
+/**
+ * "Waiting for you" line.
+ * - couple or unknown -> "Чекаємо на вас"
+ * - single            -> "Чекаємо на тебе"
+ */
+export function buildWaitingText(guest: Guest | null | undefined): string {
+  if (guest && guest.type === "single") return "Чекаємо на тебе"
+  return "Чекаємо на вас"
 }
