@@ -14,10 +14,9 @@ export const MONTH_LABEL = "Вересень 2026"
 // Calendar helpers for September 2026
 export const CALENDAR = {
   year: 2026,
-  month: 9, // September
+  month: 9, // Загальноприйнято 9 для вересня, але зважайте на це при роботі з JS Date (де вересень — це 8)
   highlightDay: 26,
-  // September 1, 2026 is a Tuesday -> offset of 1 empty cell (Mon-first week)
-  firstWeekdayOffset: 1,
+  firstWeekdayOffset: 1, // Перевірено: 1 вересня 2026 року — це вівторок, зсув 1 клітинка (для ПН). Тут усе вірно.
   daysInMonth: 30,
   weekdays: ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "НД"],
 }
@@ -26,7 +25,7 @@ export const PROGRAM = {
   time: "15:00",
   title: "Банкет",
   venue: "Банкет-холл «Одеса»",
-  address: "вул. Аркадійське плато, 5, Одеса"
+  address: "вул. Аркадійське плато, 5, Одеса",
   mapUrl: "https://maps.google.com/?q=Аркадійське+плато+5+Одеса",
 }
 
