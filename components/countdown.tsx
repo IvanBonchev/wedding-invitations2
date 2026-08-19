@@ -33,19 +33,21 @@ export function Countdown() {
   }, [])
 
   return (
-    <section className="bg-gradient-to-br from-burgundy to-burgundy-dark px-6 py-20 text-center sm:py-24">
-      <p className="font-script text-4xl text-gold sm:text-5xl">До зустрічі лишилось</p>
+    <section className="bg-gradient-to-br from-burgundy to-burgundy-dark px-2 py-12 text-center sm:px-6 sm:py-24">
+      <p className="font-script text-3xl text-gold sm:text-5xl">До зустрічі лишилось</p>
 
-      <div className="mx-auto mt-10 grid max-w-xl grid-cols-4 gap-3 sm:gap-6">
+      {/* Оставили grid-cols-4 для всех экранов, уменьшили отступы между колонками (gap-1.5 на мобилках) */}
+      <div className="mx-auto mt-6 grid max-w-xl grid-cols-4 gap-1.5 sm:mt-10 sm:gap-6">
         {UNITS.map(({ key, label }) => (
           <div
             key={key}
-            className="rounded-xl border border-gold/25 bg-cream/5 px-2 py-5 backdrop-blur-sm"
+            className="rounded-lg border border-gold/25 bg-cream/5 px-1 py-3 backdrop-blur-sm sm:rounded-xl sm:px-2 sm:py-5"
           >
-            <div className="font-script text-4xl text-cream sm:text-5xl tabular-nums">
+            {/* Уменьшили текст цифр на мобильных до text-2xl, чтобы они не вылезали за границы */}
+            <div className="font-script text-2xl text-cream sm:text-5xl tabular-nums">
               {parts ? String(parts[key]).padStart(2, "0") : "--"}
             </div>
-            <div className="mt-2 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-gold-soft sm:text-xs">
+            <div className="mt-1 text-[0.55rem] font-semibold uppercase tracking-[0.1em] text-gold-soft sm:mt-2 sm:text-xs sm:tracking-[0.2em]">
               {label}
             </div>
           </div>
