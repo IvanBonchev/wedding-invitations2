@@ -22,9 +22,7 @@ export function Details() {
           Чекаємо на вас з нетерпінням!
         </p>
 
-        <p className="mt-6 text-sm font-semibold uppercase tracking-[0.3em] text-ink-soft">
-          {COUPLE.groom} &amp; {COUPLE.bride}
-        </p>
+       
       </div>
     </section>
   )
