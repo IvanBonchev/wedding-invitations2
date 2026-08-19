@@ -30,6 +30,25 @@ export const PROGRAM = {
   mapUrl: "https://maps.google.com/?q=Аркадійське+плато+5+Одеса",
 }
 
+export const SCHEDULE: { time: string; text: string }[] = [
+  {
+    time: "14:00",
+    text: "Збір гостей і фуршет, де ви зможете відпочити та насолодитися закусками",
+  },
+  {
+    time: "15:00",
+    text: "Урочиста церемонія, час зворушливих формальностей",
+  },
+  {
+    time: "16:00",
+    text: "Час смачної їжі, музики, приємних побажань і танців",
+  },
+  {
+    time: "22:00",
+    text: "Весільний торт, плавне завершення вечора і початок нової історії",
+  },
+]
+
 export const DRESS_CODE = "Елегантний / Smart Casual"
 
 export const PALETTE: { name: string; hex: string }[] = [
@@ -49,16 +68,11 @@ export const PALETTE: { name: string; hex: string }[] = [
 
 /**
  * Builds the personalized greeting from a ?guest= query value.
- * - no guest      -> "ЛЮБІ ГОСТІ"
- * - single name   -> "ЛЮБА <NAME>"
- * - several names  -> "ЛЮБІ <NAME>" (detected via "та", "і", "&", or a comma)
- * The provided name is inserted as-is, in uppercase.
+ * - no guest   -> "Любі наші гості"
+ * - with guest -> "Любі наші <NAMES>" (names inserted as-is, e.g. "Петре та Ганно Бончеви")
  */
 export function buildGreeting(guest: string | null | undefined): string {
   const value = (guest ?? "").trim()
-  if (!value) return "ЛЮБІ ГОСТІ"
-
-  const isPlural = /(\s|^)(та|і|and)(\s|$)|&|,/i.test(value)
-  const prefix = isPlural ? "ЛЮБІ" : "ЛЮБА"
-  return `${prefix} ${value.toUpperCase()}`
+  if (!value) return "Любі наші гості"
+  return `Любі наші ${value}`
 }
