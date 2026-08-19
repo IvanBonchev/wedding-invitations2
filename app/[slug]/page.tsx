@@ -8,10 +8,13 @@ export function generateStaticParams() {
 
 export default async function GuestPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ slug: string }>
+  searchParams: Promise<{ admin?: string }>
 }) {
   const { slug } = await params
+  const { admin } = await searchParams
   const guest = getGuestBySlug(slug)
-  return <Invitation guest={guest} />
+  return <Invitation guest={guest} admin={admin === "true"} />
 }

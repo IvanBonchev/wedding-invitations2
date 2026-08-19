@@ -18,7 +18,13 @@ import { Details } from "@/components/details"
 import { SiteFooter } from "@/components/site-footer"
 import { OrganizerPanel } from "@/components/organizer-panel"
 
-export function Invitation({ guest }: { guest: Guest | null }) {
+export function Invitation({
+  guest,
+  admin = false,
+}: {
+  guest: Guest | null
+  admin?: boolean
+}) {
   const [opened, setOpened] = useState(false)
   const [playSignal, setPlaySignal] = useState(0)
 
@@ -52,7 +58,7 @@ export function Invitation({ guest }: { guest: Guest | null }) {
         <DressCode />
         <Details />
         <SiteFooter />
-        <OrganizerPanel />
+        {admin && <OrganizerPanel />}
       </main>
     </>
   )
