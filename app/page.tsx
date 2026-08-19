@@ -14,7 +14,7 @@ import { Details } from "@/components/details"
 import { SiteFooter } from "@/components/site-footer"
 
 export default function Page() {
-  const [greeting, setGreeting] = useState("ЛЮБІ ГОСТІ")
+  const [greeting, setGreeting] = useState("Любі наші гості")
   const [opened, setOpened] = useState(false)
   const [playSignal, setPlaySignal] = useState(0)
 
@@ -40,12 +40,12 @@ export default function Page() {
 
   return (
     <>
-      <EnvelopeCover greeting={greeting} open={opened} onOpen={handleOpen} />
+      <EnvelopeCover open={opened} onOpen={handleOpen} />
       <MusicPlayer playSignal={playSignal} />
 
       <main>
-        <Hero greeting={greeting} />
-        <Intro />
+        <Hero />
+        <Intro greeting={greeting} />
         <DateCalendar />
         <Countdown />
         <Program />

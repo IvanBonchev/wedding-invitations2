@@ -1,6 +1,6 @@
-import { PROGRAM } from "@/lib/wedding"
+import { SCHEDULE, PROGRAM } from "@/lib/wedding"
 import { FloralCorner } from "@/components/floral-corner"
-import { MapPin, Wine } from "lucide-react"
+import { MapPin } from "lucide-react"
 
 export function Program() {
   return (
@@ -8,22 +8,29 @@ export function Program() {
       <FloralCorner corner="tr" />
       <FloralCorner corner="bl" />
 
-      <div className="relative mx-auto max-w-md text-center">
+      <div className="relative mx-auto max-w-lg text-center">
         <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold">
           Програма дня
         </p>
 
-        <div className="mt-10 rounded-2xl border border-gold/25 bg-cream-deep/60 p-8 shadow-sm shadow-burgundy-dark/5">
-          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-burgundy text-cream">
-            <Wine className="h-6 w-6" />
-          </div>
+        <ol className="mt-10 space-y-6 text-left">
+          {SCHEDULE.map((item) => (
+            <li
+              key={item.time}
+              className="flex gap-4 rounded-2xl border border-gold/25 bg-cream-deep/60 p-5 shadow-sm shadow-burgundy-dark/5 sm:gap-5 sm:p-6"
+            >
+              <span className="shrink-0 font-script text-3xl leading-none text-burgundy sm:text-4xl">
+                {item.time}
+              </span>
+              <span className="text-pretty text-base leading-relaxed text-ink sm:text-lg">
+                {item.text}
+              </span>
+            </li>
+          ))}
+        </ol>
 
-          <p className="mt-6 font-script text-5xl text-burgundy">{PROGRAM.time}</p>
-          <p className="mt-1 text-sm font-semibold uppercase tracking-[0.3em] text-ink-soft">
-            {PROGRAM.title}
-          </p>
-
-          <p className="mt-6 text-lg font-medium text-ink">{PROGRAM.venue}</p>
+        <div className="mt-10 border-t border-gold/20 pt-8">
+          <p className="text-lg font-medium text-ink">{PROGRAM.venue}</p>
           <p className="mt-1 text-ink-soft">{PROGRAM.address}</p>
 
           <a
