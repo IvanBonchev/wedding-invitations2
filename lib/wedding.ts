@@ -137,9 +137,9 @@ export function getGuestBySlug(slug: string | null | undefined): Guest | null {
 
 /**
  * Personalized greeting line.
- * - couple            -> "Любі наші <name>"
- * - single, female    -> "Люба наша <name>"
- * - single, male      -> "Любий наш <name>"
+ * - couple            -> "Любі  <name>"
+ * - single, female    -> "Люба  <name>"
+ * - single, male      -> "Любий  <name>"
  * - unknown guest     -> "Дорогі гості"
  */
 export function buildGreeting(guest: Guest | null | undefined): string {
