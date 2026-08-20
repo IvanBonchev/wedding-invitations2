@@ -144,9 +144,9 @@ export function getGuestBySlug(slug: string | null | undefined): Guest | null {
  */
 export function buildGreeting(guest: Guest | null | undefined): string {
   if (!guest) return "Дорогі гості"
-  if (guest.type === "couple") return `Любі наші ${guest.name}`
-  if (guest.gender === "f") return `Люба наша ${guest.name}`
-  return `Любий наш ${guest.name}`
+  if (guest.type === "couple") return `Любі ${guest.name}`
+  if (guest.gender === "f") return `Люба ${guest.name}`
+  return `Любий ${guest.name}`
 }
 
 /**
